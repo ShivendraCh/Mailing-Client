@@ -1,15 +1,21 @@
-import getpass
 import smtplib
-from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from email.utils import formatdate
 
-HOST = "smtp-mail.outlook.com"
+HOST = "smtp.gmail.com"
 PORT = 587
 
-from_Email = "Shivendracloud@outlook.com"
-to_Email = "Shivendracoud@gmail.com"
-passWord = getpass.getpass("Enter password:")
+to_Email = "Shivendracloud0309@gmail.com"
+
+#importing email and password
+from configparser import ConfigParser
+config_path = "/home/joy/Com/config.ini"
+config = ConfigParser()
+config.read((config_path))
+
+from_Email = config.get("smtp", "email")
+passWord = config.get("smtp", "password")
 
 # Create the message with headers
 msg = MIMEMultipart()
@@ -21,7 +27,7 @@ msg['Reply-To'] = from_Email  # Add a Reply-To header
 
 # Message body
 body = """
-Yo, This is Shivendra Mailing Shivendra.
+Yo, This is Shivendra Mailing from python.
 Hi,
 Hope this works!
 
