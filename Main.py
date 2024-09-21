@@ -1,4 +1,5 @@
 import smtplib
+
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
@@ -18,7 +19,8 @@ config.read(config_path)
 from_Email = config.get("smtp", "email")
 passWord = config.get("smtp", "password")
 
-to_Email = "Shivendracloud0309@gmail.com"
+
+target_email = input("Enter the target's email:")
 target = input("Enter the target's name: ")
 
 # Path to the image
@@ -27,7 +29,7 @@ image_path = "/home/joy/Downloads/IMG_20240918_202529.jpg"
 # Create the email message with headers
 msg = MIMEMultipart()
 msg['From'] = from_Email
-msg['To'] = to_Email
+msg['To'] = target_email
 msg['Subject'] = f"Hello {target}! This is your chance to be R$CH"
 msg['Date'] = formatdate(localtime=True)  # Add the Date header
 msg['Reply-To'] = from_Email  # Add a Reply-To header
@@ -79,7 +81,7 @@ try:
     print(f"[*] Login status: {status_Code} {response.decode()}")
 
     # Send the email
-    smtp.sendmail(from_Email, to_Email, msg.as_string())
+    smtp.sendmail(from_Email, target_email, msg.as_string())
     print("[*] Email sent successfully!")
 
     # Close the SMTP connection
