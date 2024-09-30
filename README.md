@@ -1,12 +1,5 @@
 # WhiteMailer - Automated Mailing Client
-#   __          ___     _ _                       _ _           
-#   \ \        / | |   (_| |                     (_| |          
-#    \ \  /\  / /| |__  _| |_ ___ _ __ ___   __ _ _| | ___ _ __ 
-#     \ \/  \/ / | '_ \| | __/ _ | '_ ` _ \ / _` | | |/ _ | '__|
-#      \  /\  /  | | | | | ||  __| | | | | | (_| | | |  __| |   
-#       \/  \/   |_| |_|_|\__\___|_| |_| |_|\__,_|_|_|\___|_|   
-#                                                               
-#
+
 ## Overview
 WhiteMailer is a Python-based email client that allows users to send emails to one or more recipients at once. It’s designed to be simple and flexible, allowing you to customize the email content and add attachments like images. This tool can be useful for sending personalized emails in bulk, where each recipient is addressed by their name (extracted from their email).
 
