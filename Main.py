@@ -1,5 +1,4 @@
 import smtplib
-
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
@@ -19,9 +18,21 @@ config.read(config_path)
 from_Email = config.get("smtp", "email")
 passWord = config.get("smtp", "password")
 
+# Welcome menu
+print("Welcome to WhiteMailer:")
+choice = input("Do you want to send an email to a single address or multiple addresses?\nEnter 1 for single and 2 for multiple: ")
 
-target_email = input("Enter the target's email:")
-target = input("Enter the target's name: ")
+if choice == "1":
+    target_email = input("Enter the target's email: ")
+    target_emails = [target_email]  # Convert to a list to handle uniformly
+elif choice == "2":
+    target_emails = input("Enter the target emails separated by commas: ").split(",")
+    target_emails = [email.strip() for email in target_emails]  # Strip whitespace
+else:
+    print("[!] Invalid choice.")
+    exit(1)
+
+target_name = input("Enter the target's name: ")
 
 # Path to the image
 image_path = "/home/joy/Downloads/IMG_20240918_202529.jpg"
@@ -29,19 +40,18 @@ image_path = "/home/joy/Downloads/IMG_20240918_202529.jpg"
 # Create the email message with headers
 msg = MIMEMultipart()
 msg['From'] = from_Email
-msg['To'] = target_email
-msg['Subject'] = f"Hello {target}! This is your chance to be R$CH"
+msg['Subject'] = f"Hello {target_name}! This is your chance to be R$CH"
 msg['Date'] = formatdate(localtime=True)  # Add the Date header
 msg['Reply-To'] = from_Email  # Add a Reply-To header
 
 # Email body content
 body = """
-Hey! Are you tired of your Boring job?
-You want to be rich quick?
+Hey! Are you tired of your boring job?
+Want to get rich quick?
 Hi,
 This is Anuradha from 21 din mein paisa double!
-This is a totally legit company that gives your money double in 21 days.
-Our Certification is called "Trust me bro"
+This is a totally legit company that will double your money in 21 days.
+Our certification is called "Trust me bro".
 Reply with your credit card information to apply.
 
 Thanks,
@@ -80,9 +90,11 @@ try:
     status_Code, response = smtp.login(from_Email, passWord)
     print(f"[*] Login status: {status_Code} {response.decode()}")
 
-    # Send the email
-    smtp.sendmail(from_Email, target_email, msg.as_string())
-    print("[*] Email sent successfully!")
+    # Send the email to each recipient
+    for target_email in target_emails:
+        msg['To'] = target_email
+        smtp.sendmail(from_Email, target_email, msg.as_string())
+        print(f"[*] Email sent successfully to {target_email}!")
 
     # Close the SMTP connection
     smtp.quit()

@@ -1,25 +1,14 @@
 from configparser import ConfigParser
 import getpass
-
+from Mailer import Mailer
 
 class WhiteMailer:
-    def main_menu(self):
-        """Selecting different modes"""
-        print("**Welcome to WhiteMailing**!")
-        print("This is a custom mail program made by Shivendra Chauhan!")
-        print("Menu\n"
-              "1. Mailer\n"
-              "2. Guide\n"
-              "3. Email Templates\n"
-              "4. Email History\n"
-              "5. Settings\n"
-              "6. About the creator")
 
     def main_menu(self):
         """Main menu for the user to navigate through options"""
         while True:
             print("**Welcome to WhiteMailing**!")
-            print("1. Mailer\n2. Guide\n3. Email Templates\n4. Email History\n5. Settings\n6. About the creator")
+            print("1. Mailer\n2. Guide\n3. Email Templates\n4. Email History\n5. Settings\n6. About the creator \n7.Quit")
 
             choice = input("Choose an option: ")
             if choice == "1":
