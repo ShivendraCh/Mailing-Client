@@ -5,3 +5,4 @@ class Configuration:
         PORT = 587
         print(f"SMTP Server: {HOST}, Port: {PORT}")
         # Can add logic to edit or save these settings later
+#this is now changed due to change
